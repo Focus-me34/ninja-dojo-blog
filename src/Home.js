@@ -1,10 +1,10 @@
 import { useState } from "react"
 
 const Home = () => {
-  const [name, updateName] = useState("Mario")
+  const [name, setName] = useState("Mario")
 
   const handleClick = (e) => {
-    updateName("Luigi")
+    setName("Luigi")
   }
 
   return (
