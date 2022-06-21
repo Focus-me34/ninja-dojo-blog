@@ -6,24 +6,24 @@ import "./index.css";
 
 function App() {
   return (
-    <Router> // ! Router functionality starts here
+    <Router>
       <div className="App">
         <Navbar />
 
         <div className='content'>
-          <Switch> // ! Switch begin here
-            <Route exact path="/">       // ! Route 1: root_path
+          <Switch>
+            <Route exact path="/">
               <Home />
             </Route>
-            <Route exact path="/create"> // ! Route 2: "/create"
+            <Route exact path="/create">
               <Create />
             </Route>
-          </Switch> // ! Switch ends here
+          </Switch>
 
         </div>
       </div>
 
-    </Router> // ! Router functionality stops here
+    </Router>
   );
 }
 
