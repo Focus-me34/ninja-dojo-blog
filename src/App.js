@@ -9,6 +9,7 @@ function App() {
     <Router> // ! Router functionality starts here
       <div className="App">
         <Navbar />
+
         <div className='content'>
           <Switch> // ! Switch begin here
             <Route exact path="/">       // ! Route 1: root_path
@@ -18,6 +19,7 @@ function App() {
               <Create />
             </Route>
           </Switch> // ! Switch ends here
+
         </div>
       </div>
 
