@@ -9,7 +9,6 @@ const useFetch = (url) => {
   useEffect(() => {
     const abortContr = new AbortController()
 
-    setTimeout(() => {
       fetch(url, { signal: abortContr.signal })
         .then(res => {
           if (!res.ok) throw Error("Could not fetch the data for that resource")
@@ -27,7 +26,6 @@ const useFetch = (url) => {
             setIsPending(false)
           }
         })
-    }, 1000);
 
     return () => abortContr.abort()
   }, [url])

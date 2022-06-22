@@ -1,15 +1,16 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 const Create = () => {
-  const [title, setTitle] = useState("")
-  const [content, setContent] = useState("")
-  const [author, setAuthor] = useState("mario")
-  const [isPending, setIsPending] = useState(false)
-
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
+  const [author, setAuthor] = useState("mario");
+  const [isPending, setIsPending] = useState(false);
+  const history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const blog = { title, content, author }
+    const blog = { title, body, author }
 
     setIsPending(true)
 
@@ -17,13 +18,14 @@ const Create = () => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(blog)
-    }).then(data => console.log(data))
-    .then(() => {
-      setIsPending(false)
-      setTitle("")
-      setContent("")
-      setAuthor("mario")
-    })
+    }).then(res => res.json())
+      .then((data) => {
+        setIsPending(false)
+        setTitle("")
+        setBody("")
+        setAuthor("mario")
+        history.push(`/blogs/${data.id}`)
+      })
   }
 
   return (
@@ -36,7 +38,7 @@ const Create = () => {
         <input onChange={(e) => setTitle(e.target.value)} value={title} type="text" name="title" required id="input[title]" placeholder="Type your title here..." />
 
         <label htmlFor="content">Blog Body</label>
-        <textarea onChange={(e) => setContent(e.target.value)} value={content} name="content" required id="input[content]" cols="30" rows="4" placeholder="Type the content of your blog here..."></textarea>
+        <textarea onChange={(e) => setBody(e.target.value)} value={body} name="content" required id="input[content]" cols="30" rows="4" placeholder="Type the content of your blog here..."></textarea>
 
         <label htmlFor="author">Blog Author</label>
         <select onChange={(e) => setAuthor(e.target.value)} name="author" required id="input[author]" value={author}>
@@ -49,11 +51,6 @@ const Create = () => {
         {isPending && <button disabled>Adding blog...</button>}
 
       </form>
-
-      <p>{title}</p>
-      <p>{content}</p>
-      <p>{author}</p>
-
     </div>
   );
 }
