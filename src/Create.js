@@ -4,11 +4,26 @@ const Create = () => {
   const [title, setTitle] = useState("")
   const [content, setContent] = useState("")
   const [author, setAuthor] = useState("mario")
+  const [isPending, setIsPending] = useState(false)
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const blog = { title, content, author }
-    console.log(blog);
+
+    setIsPending(true)
+
+    fetch("http://localhost:8000/blogs", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(blog)
+    }).then(data => console.log(data))
+    .then(() => {
+      setIsPending(false)
+      setTitle("")
+      setContent("")
+      setAuthor("mario")
+    })
   }
 
   return (
@@ -21,7 +36,7 @@ const Create = () => {
         <input onChange={(e) => setTitle(e.target.value)} value={title} type="text" name="title" required id="input[title]" placeholder="Type your title here..." />
 
         <label htmlFor="content">Blog Body</label>
-        <textarea onChange={(e) => setContent(e.target.value)} name="content" required id="input[content]" cols="30" rows="4" placeholder="Type the content of your blog here..."></textarea>
+        <textarea onChange={(e) => setContent(e.target.value)} value={content} name="content" required id="input[content]" cols="30" rows="4" placeholder="Type the content of your blog here..."></textarea>
 
         <label htmlFor="author">Blog Author</label>
         <select onChange={(e) => setAuthor(e.target.value)} name="author" required id="input[author]" value={author}>
@@ -30,7 +45,8 @@ const Create = () => {
           <option value="peach">Peach</option>
           <option value="bowser">Bowser</option>
         </select>
-        <button type="submit">Publish this blog</button>
+        {!isPending && <button type="submit">Add this blog</button>}
+        {isPending && <button disabled>Adding blog...</button>}
 
       </form>
 
