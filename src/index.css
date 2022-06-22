@@ -80,6 +80,8 @@
   padding: 8px;
   border-radius: 8px;
   cursor: pointer;
+  display: flex;
+  margin: 0 auto;
 }
 
 /* create new blog form */
