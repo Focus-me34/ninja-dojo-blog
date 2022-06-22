@@ -1,15 +1,21 @@
 import { useEffect, useState } from "react";
 
 const Create = () => {
-const [title, setTitle] = useState("")
-const [content, setContent] = useState("")
-const [author, setAuthor] = useState("mario")
+  const [title, setTitle] = useState("")
+  const [content, setContent] = useState("")
+  const [author, setAuthor] = useState("mario")
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const blog = { title, content, author }
+    console.log(blog);
+  }
 
   return (
     <div className="create">
       <h2>Add a new blog</h2>
 
-      <form>
+      <form onSubmit={handleSubmit}>
 
         <label htmlFor="title">Blog Title</label>
         <input onChange={(e) => setTitle(e.target.value)} value={title} type="text" name="title" required id="input[title]" placeholder="Type your title here..." />
