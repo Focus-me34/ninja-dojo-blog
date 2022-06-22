@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import "./index.css";
 
 function App() {
+
   return (
     <Router>
       <div className="App">
@@ -14,11 +15,11 @@ function App() {
         <div className='content'>
           <Switch>
             <Route exact path="/">
-              <Home />
+              <Home/>
             </Route>
 
             <Route exact path="/create">
-              <Create />
+              <Create/>
             </Route>
 
             <Route exact path="/blogs/:id">
